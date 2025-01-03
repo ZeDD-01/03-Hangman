@@ -12,3 +12,4 @@
 /Users/manuel/RiderProjects/Hangman/Hangman/obj/Debug/net9.0/Hangman.pdb
 /Users/manuel/RiderProjects/Hangman/Hangman/obj/Debug/net9.0/Hangman.genruntimeconfig.cache
 /Users/manuel/RiderProjects/Hangman/Hangman/obj/Debug/net9.0/ref/Hangman.dll
+/Users/manuel/RiderProjects/Hangman/Hangman/obj/Debug/net9.0/Hangman.sourcelink.json
