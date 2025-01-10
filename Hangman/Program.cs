@@ -10,9 +10,9 @@ class Hangman
         List<String> hangmanWords = new List<string>();
         
         hangmanWords.Add("garage");
-        //hangmanWords.Add("Bauzaun");
-        //hangmanWords.Add("Bratensoße");
-        //hangmanWords.Add("Hemd");
+        hangmanWords.Add("bauzaun");
+        hangmanWords.Add("bratensosse");
+        hangmanWords.Add("hemd");
         
         //Randomly a word is being chosen
         Random rnd = new Random();
@@ -28,28 +28,48 @@ class Hangman
         }
         
         Console.WriteLine("The word you have to guess has " + chosenWord.Length + " letters");
-        Console.Write("Choose a letter: ");
-        char userInput = Convert.ToChar(Console.ReadLine().ToLower());
+        Console.WriteLine(chosenWord);
        
-        //Run through the word and compare the user input with the existing letters
-        bool x = false;
-        while (x == false)
+        int falseGuesses = 0;
+        bool condition = true;
+        int numberOfGuesses = 10;
+        //As long as the condition is true, the user can enter letters
+        while (condition == true)
         {
+            Console.Write("Choose a letter: ");
+            char userInput = Convert.ToChar(Console.ReadLine().ToLower());
+
+            bool rightGuessed = false;
+
             for (int i = 0; i < chosenWord.Length; i++)
             {
                 if (chosenWord[i] == userInput)
                 {
                     letters[i] = userInput;
+                    rightGuessed = true;
+                }
+            }
+            Console.WriteLine(string.Join(" ", letters));
+
+            if (!rightGuessed)
+                {
+                    falseGuesses++;
+                    Console.WriteLine("This letter is not contained in the word. You can try " + (numberOfGuesses - falseGuesses) + " times");
                 }
 
-                
-            }
+                if (!Array.Exists(letters, letter => letter == '_'))
+                {
+                    Console.WriteLine("Tadaaa. You guessed the word");
+                    condition = false;
+                    break;
+                }
 
-            Console.WriteLine(string.Join(" ",letters));
-            Console.WriteLine("Choose the next letter: "); 
-            userInput = Convert.ToChar(Console.ReadLine().ToLower());
+                if (falseGuesses >= numberOfGuesses)
+                {
+                    Console.WriteLine("You used too many tries. Sorry, you lost");
+                    condition = false;
+                    break;
+                }
         }
-            
-        
     }
 }
