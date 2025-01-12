@@ -32,40 +32,45 @@ class Hangman
        
         int falseGuesses = 0;
         bool continueUserInput = true;
-        int numberOfGuesses = 10;
+        const int NUMBER_OF_GUESSES = 10;
         
         //As long as the condition is true, the user can enter letters
-        while (continueUserInput == true)
+        while (continueUserInput)
         {
             Console.Write("Choose a letter: ");
             char userInput = Convert.ToChar(Console.ReadLine().ToLower());
 
             bool rightGuessed = false;
-
-            for (int i = 0; i < chosenWord.Length; i++)
+            
+            if (chosenWord.Contains(userInput))
             {
-                if (chosenWord[i] == userInput)
+                Console.WriteLine("You got the letter! ");
+                for (int i = 0; i < chosenWord.Length; i++)
                 {
-                    letters[i] = userInput;
-                    rightGuessed = true;
+                    if (chosenWord[i] == userInput)
+                    {
+                        letters[i] = userInput;
+                        rightGuessed = true;
+                    }
                 }
             }
+            
             Console.WriteLine(string.Join(" ", letters));
 
             if (!rightGuessed)
                 {
                     falseGuesses++;
-                    Console.WriteLine("This letter is not contained in the word. You can try " + (numberOfGuesses - falseGuesses) + " times");
+                    Console.WriteLine("This letter is not contained in the word. You can try " + (NUMBER_OF_GUESSES - falseGuesses) + " times");
                 }
 
-                if (!Array.Exists(letters, letter => letter == '_'))
+            if (!Array.Exists(letters, letter => letter == '_'))
                 {
                     Console.WriteLine("Tadaaa. You guessed the word");
                     continueUserInput = false;
                     break;
                 }
 
-                if (falseGuesses >= numberOfGuesses)
+            if (falseGuesses >= NUMBER_OF_GUESSES)
                 {
                     Console.WriteLine("You used too many tries. Sorry, you lost");
                     continueUserInput = false;
