@@ -31,10 +31,11 @@ class Hangman
         Console.WriteLine(chosenWord);
        
         int falseGuesses = 0;
-        bool condition = true;
+        bool continueUserInput = true;
         int numberOfGuesses = 10;
+        
         //As long as the condition is true, the user can enter letters
-        while (condition == true)
+        while (continueUserInput == true)
         {
             Console.Write("Choose a letter: ");
             char userInput = Convert.ToChar(Console.ReadLine().ToLower());
@@ -60,14 +61,14 @@ class Hangman
                 if (!Array.Exists(letters, letter => letter == '_'))
                 {
                     Console.WriteLine("Tadaaa. You guessed the word");
-                    condition = false;
+                    continueUserInput = false;
                     break;
                 }
 
                 if (falseGuesses >= numberOfGuesses)
                 {
                     Console.WriteLine("You used too many tries. Sorry, you lost");
-                    condition = false;
+                    continueUserInput = false;
                     break;
                 }
         }
