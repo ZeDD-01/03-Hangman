@@ -40,7 +40,6 @@ class Hangman
         while (continueUserInput)
         {
             Console.Write("Choose a letter: ");
-            //char userInput = Convert.ToChar(Console.ReadLine().ToLower());
             ConsoleKeyInfo userInputKey = Console.ReadKey();
             char userInput = userInputKey.KeyChar;
            
