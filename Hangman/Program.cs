@@ -10,6 +10,7 @@ class Hangman
 
         //List that saves the words, that needs to be guessed
         List<String> hangmanWords = new List<string>();
+        List<Char> usedCharacters = new List<char>();
 
         hangmanWords.Add("garage");
         hangmanWords.Add("bauzaun");
@@ -43,28 +44,31 @@ class Hangman
             ConsoleKeyInfo userInputKey = Console.ReadKey();
             char userInput = userInputKey.KeyChar;
 
+
             bool rightGuessed = false;
+
+
+            if (usedCharacters.Contains(userInput))
+            {
+                Console.WriteLine("You have already chosen this character.");
+                continue;
+            }
 
             if (chosenWord.Contains(userInput))
             {
                 Console.WriteLine("You got the letter! ");
+
                 for (int i = 0; i < chosenWord.Length; i++)
                 {
                     if (chosenWord[i] == userInput)
                     {
-                        if (letters[i] != '_')
-                        {
-                            Console.WriteLine("You already had this letter! ");
-                        }
-                        else
-                        {
-                            letters[i] = userInput;
-                        }
+                        letters[i] = userInput;
 
                         rightGuessed = true;
                     }
                 }
             }
+
 
             Console.WriteLine(string.Join(" ", letters));
 
@@ -88,6 +92,8 @@ class Hangman
                 continueUserInput = false;
                 break;
             }
+
+            usedCharacters.Add(userInput);
         }
     }
 }
