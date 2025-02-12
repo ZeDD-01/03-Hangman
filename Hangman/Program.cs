@@ -8,9 +8,9 @@ class Hangman
     {
         Console.WriteLine("Welcome to Hangman");
 
+        List<Char> usedCharacters = new List<char>();
         //List that saves the words, that needs to be guessed
         List<String> hangmanWords = new List<string>();
-        List<Char> usedCharacters = new List<char>();
 
         hangmanWords.Add("garage");
         hangmanWords.Add("bauzaun");
@@ -30,12 +30,11 @@ class Hangman
             letters[i] = '_';
         }
 
-        Console.WriteLine("The word you have to guess has " + chosenWord.Length + " letters");
-        Console.WriteLine(chosenWord);
+        Console.WriteLine($"The word you have to guess has {chosenWord.Length} letters");
+        Console.WriteLine(letters);
 
         int falseGuesses = 0;
         bool continueUserInput = true;
-
 
         //As long as the condition is true, the user can enter letters
         while (continueUserInput)
@@ -43,20 +42,21 @@ class Hangman
             Console.Write("Choose a letter: ");
             ConsoleKeyInfo userInputKey = Console.ReadKey();
             char userInput = userInputKey.KeyChar;
-
+            
 
             bool rightGuessed = false;
-
 
             if (usedCharacters.Contains(userInput))
             {
                 Console.WriteLine("You have already chosen this character.");
                 continue;
             }
+            
+            usedCharacters.Add(userInput);
 
             if (chosenWord.Contains(userInput))
             {
-                Console.WriteLine("You got the letter! ");
+                Console.WriteLine("\nYou got the letter! ");
 
                 for (int i = 0; i < chosenWord.Length; i++)
                 {
@@ -69,14 +69,12 @@ class Hangman
                 }
             }
 
-
-            Console.WriteLine(string.Join(" ", letters));
+            Console.WriteLine("\n" +string.Join(" ", letters));
 
             if (!rightGuessed)
             {
                 falseGuesses++;
-                Console.WriteLine("This letter is not contained in the word. You can try " +
-                                  (NUMBER_OF_GUESSES - falseGuesses) + " times");
+                Console.WriteLine($"\nThis letter is not contained in the word. You can try{NUMBER_OF_GUESSES - falseGuesses} times");
             }
 
             if (!Array.Exists(letters, letter => letter == '_'))
@@ -92,8 +90,7 @@ class Hangman
                 continueUserInput = false;
                 break;
             }
-
-            usedCharacters.Add(userInput);
+            
         }
     }
 }
